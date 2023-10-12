@@ -1,0 +1,40 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .ts-search-input {
+    padding-left: calc(var(--input-padding) + 24px + var(--spacing-sm)) !important;
+  }
+
+  .ts-search-icon {
+    @apply absolute text-[--body-text-color] left-[--input-padding] inset-y-[--input-padding] flex
+           items-center pointer-events-none;
+  }
+
+  .ts-btn-action {
+    @apply !m-0 first:rounded-l-[--button-small-radius] last:rounded-r-[--button-small-radius];
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      color: var(--color-accent);
+    }
+    50% {
+      color: var(--color-accent-soft);
+    }
+  }
+
+  .ag-cell.task-running {
+    color: var(--color-accent);
+    animation: 1s blink ease infinite;
+  }
+
+  .ag-cell.task-failed {
+    @apply text-[--error-text-color];
+  }
+
+  .ag-cell.task-interrupted {
+    @apply text-[--body-text-color-subdued];
+  }
+}

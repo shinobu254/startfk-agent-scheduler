@@ -1,0 +1,401 @@
+@use 'ag-grid-community/styles/ag-theme-alpine.css';
+@import './tailwind.css';
+
+/* ========================================================================= */
+
+.ag-theme-gradio {
+  @extend .ag-theme-alpine;
+  .dark & {
+    @extend .ag-theme-alpine-dark;
+  }
+}
+.ag-theme-gradio,
+.dark .ag-theme-gradio {
+  > * {
+    --body-text-color: 'inherit';
+  }
+
+  --ag-alpine-active-color: var(--color-accent);
+  --ag-selected-row-background-color: var(--table-row-focus);
+  --ag-modal-overlay-background-color: transparent;
+  --ag-row-hover-color: transparent;
+  --ag-column-hover-color: transparent;
+  --ag-input-focus-border-color: var(--input-border-color-focus);
+  --ag-background-color: var(--table-even-background-fill);
+  --ag-foreground-color: var(--body-text-color);
+  --ag-border-color: var(--border-color-primary);
+  --ag-secondary-border-color: var(--border-color-primary);
+  --ag-header-background-color: var(--table-even-background-fill);
+  --ag-tooltip-background-color: var(--table-even-background-fill);
+  --ag-odd-row-background-color: var(--table-even-background-fill);
+  --ag-control-panel-background-color: var(--table-even-background-fill);
+  --ag-invalid-color: var(--error-text-color);
+  --ag-input-border-color: var(--input-border-color);
+  --ag-disabled-foreground-color: var(--body-text-color-subdued);
+  --ag-row-border-color: var(--border-color-primary);
+
+  --ag-row-height: 45px;
+  --ag-header-height: 45px;
+  --ag-cell-horizontal-padding: calc(var(--ag-grid-size) * 2);
+
+  .ag-root-wrapper {
+    border-radius: var(--table-radius);
+  }
+
+  .ag-row-even {
+    background: var(--table-odd-background-fill);
+  }
+
+  .ag-row-highlight-above,
+  .ag-row-highlight-below {
+    &::after {
+      width: 100%;
+      height: 2px;
+      left: 0;
+      z-index: 3;
+    }
+  }
+  .ag-row-highlight-above {
+    &::after {
+      top: -1.5px;
+    }
+    &.ag-row-first::after {
+      top: 0;
+    }
+  }
+  .ag-row-highlight-below {
+    &::after {
+      bottom: -1.5px;
+    }
+    &.ag-row-last::after {
+      bottom: 0;
+    }
+  }
+
+  .cell-span {
+    border-bottom-color: var(--ag-border-color);
+  }
+  .cell-not-span {
+    opacity: 0;
+  }
+  .ag-input-field-input {
+    background-color: var(--input-background-fill);
+  }
+  .ag-select .ag-picker-field-wrapper {
+    background-color: var(--input-background-fill);
+  }
+}
+.ag-center-cols-viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.ag-horizontal-left-spacer,
+.ag-horizontal-right-spacer {
+  overflow-x: hidden;
+}
+.ag-overlay {
+  z-index: 5;
+}
+
+.notyf {
+  font-family: var(--font);
+
+  .notyf__toast {
+    padding: 0 16px;
+    border-radius: 6px;
+
+    &.notyf__toast--success .notyf__ripple {
+      background-color: #22c55e !important;
+    }
+
+    &.notyf__toast--error .notyf__ripple {
+      background-color: #ef4444 !important;
+    }
+  }
+
+  .notyf__wrapper {
+    padding: 12px 0;
+  }
+}
+
+/* ========================================================================= */
+
+#tabs > #agent_scheduler_tabs {
+  margin-top: var(--layout-gap);
+}
+
+.ag-cell.pending-actions {
+  .ag-row.ag-row-editing & {
+    .control-actions {
+      display: none;
+    }
+  }
+
+  .ag-row:not(.ag-row-editing) & {
+    .edit-actions {
+      display: none;
+    }
+  }
+}
+
+.ag-cell.wrap-cell {
+  line-height: var(--line-lg);
+  padding-top: calc(var(--ag-cell-horizontal-padding) - 1px);
+  padding-bottom: calc(var(--ag-cell-horizontal-padding) - 1px);
+}
+
+button.ts-btn-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--button-transition);
+  box-shadow: var(--button-shadow);
+  padding: var(--size-1) var(--size-2) !important;
+  text-align: center;
+
+  &:hover,
+  &[disabled] {
+    box-shadow: var(--button-shadow-hover);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    filter: grayscale(30%);
+    cursor: not-allowed;
+  }
+
+  &:active {
+    box-shadow: var(--button-shadow-active);
+  }
+
+  &.primary {
+    border: var(--button-border-width) solid var(--button-primary-border-color);
+    background: var(--button-primary-background-fill);
+    color: var(--button-primary-text-color);
+
+    &:hover,
+    &[disabled] {
+      border-color: var(--button-primary-border-color-hover);
+      background: var(--button-primary-background-fill-hover);
+      color: var(--button-primary-text-color-hover);
+    }
+  }
+
+  &.secondary {
+    border: var(--button-border-width) solid var(--button-secondary-border-color);
+    background: var(--button-secondary-background-fill);
+    color: var(--button-secondary-text-color);
+
+    &:hover,
+    &[disabled] {
+      border-color: var(--button-secondary-border-color-hover);
+      background: var(--button-secondary-background-fill-hover);
+      color: var(--button-secondary-text-color-hover);
+    }
+  }
+
+  &.stop {
+    border: var(--button-border-width) solid var(--button-cancel-border-color);
+    background: var(--button-cancel-background-fill);
+    color: var(--button-cancel-text-color);
+
+    &:hover,
+    &[disabled] {
+      border-color: var(--button-cancel-border-color-hover);
+      background: var(--button-cancel-background-fill-hover);
+      color: var(--button-cancel-text-color-hover);
+    }
+  }
+}
+
+.ts-bookmark {
+  color: var(--body-text-color-subdued) !important;
+}
+.ts-bookmarked {
+  color: var(--color-accent) !important;
+}
+
+#agent_scheduler_pending_tasks_grid,
+#agent_scheduler_history_tasks_grid {
+  height: calc(100vh - 300px);
+  min-height: 400px;
+}
+
+#agent_scheduler_pending_tasks_wrapper,
+#agent_scheduler_history_wrapper {
+  border: none;
+  border-width: 0;
+  box-shadow: none;
+  justify-content: flex-end;
+  gap: var(--layout-gap);
+  padding: 0;
+
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+  }
+
+  > div:last-child {
+    width: 100%;
+
+    @media (min-width: 1280px) {
+      min-width: 400px !important;
+      max-width: min(25%, 700px);
+    }
+  }
+
+  > button {
+    flex: 0 0 auto;
+  }
+}
+
+#agent_scheduler_pending_tasks_wrapper {
+  .livePreview {
+    margin: 0;
+    padding-top: 100%;
+
+    img {
+      top: 0;
+      border-radius: 5px;
+    }
+  }
+
+  .progressDiv {
+    height: 42px;
+    line-height: 42px;
+    max-width: 100%;
+    text-align: center;
+    position: static;
+    font-size: var(--button-large-text-size);
+    font-weight: var(--button-large-text-weight);
+
+    .progress {
+      height: 42px;
+      line-height: 42px;
+    }
+
+    + .livePreview {
+      margin-top: calc(40px + var(--layout-gap));
+    }
+  }
+}
+
+#agent_scheduler_current_task_images,
+#agent_scheduler_history_gallery {
+  width: 100%;
+  padding-top: calc(100%);
+  position: relative;
+  box-sizing: content-box;
+
+  > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#agent_scheduler_history_gallery {
+  @media screen and (min-width: 1280px) {
+    .fixed-height {
+      min-height: 400px;
+    }
+  }
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.gradio-row.flex-row {
+  > *,
+  > .form,
+  > .form > * {
+    flex: initial;
+    width: initial;
+    min-width: initial;
+  }
+}
+
+#agent_scheduler_status_filter {
+  width: var(--size-36);
+}
+
+#agent_scheduler_action_search,
+#agent_scheduler_action_search_history {
+  width: var(--size-64);
+
+  > label {
+    position: relative;
+  }
+}
+
+#txt2img_enqueue_wrapper,
+#img2img_enqueue_wrapper {
+  min-width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  > div:first-child {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex: 0 0 auto;
+    flex-grow: unset !important;
+    margin-bottom: calc(var(--layout-gap) / 2);
+  }
+
+  .gradio-button,
+  .gradio-dropdown .wrap-inner {
+    min-height: 36px;
+    max-height: 42px;
+  }
+}
+
+#img2img_toprow .interrogate-col.has-queue-button {
+  min-width: unset !important;
+  flex-direction: row !important;
+  gap: calc(var(--layout-gap) / 2) !important;
+
+  button {
+    margin: 0;
+  }
+}
+
+#enqueue_keyboard_shortcut_wrapper {
+  .form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+
+    > div,
+    fieldset {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    #enqueue_keyboard_shortcut_modifiers {
+      width: 300px;
+    }
+    #enqueue_keyboard_shortcut_key {
+      width: 100px;
+    }
+    #setting_queue_keyboard_shortcut {
+      display: none;
+    }
+    #enqueue_keyboard_shortcut_disable {
+      width: 100%;
+    }
+  }
+}
+
+.modification-indicator + #enqueue_keyboard_shortcut_wrapper {
+  #enqueue_keyboard_shortcut_disable {
+    padding-left: 12px !important;
+  }
+}
